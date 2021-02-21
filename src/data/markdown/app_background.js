@@ -1,4 +1,3 @@
-const app_background = `##### An app allowing you to sort your life. 
-###### Built with React & Bootstrap!`;
+const app_background = `##### Description of your app goes here!`;
 
 export default app_background;

@@ -1,72 +1,70 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { app_background } from "./data/markdown";
 
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-import Form from "react-bootstrap/Form";
-
-import { Task } from "./components";
-
-/**
- * TODO:
- * 1. Complete all the instructions here in App.js
- * 2. Complete all the instructions in the task.js file (also change the footer to your name)
- * 3. Delete these comments & feel free to play around with bootstrap!
- * 4. Optional Challenge: Add buttons to delete tasks!
- */
+// import your custom data fetching function
+// TODO: add a data fetching function to the api.js file in the endpoints folder
+import { getAllAvatarCharacters } from "./data/endpoints";
 
 const App = () => {
-  // I've already added currTask for you as an example of useState!
-  const [currTask, setCurrTask] = useState("");
-  // follow this example above & with the useState hook, create a variable called tasks. its default value is an empty array []
+  const [characters, setCharacters] = useState(null);
 
   /**
-   * TODO: create a regular function called handleInput that takes in a parameter called event & updates currTask
-   * using setCurrTask
-   * Hint: event is an object in JavaScript that contains a bunch of information about the element that the user interacted with. In this case
-   * event belongs to the FormControl element, which is where the task is being inputed. We want to find where in the event object, the string
-   * value entered by the user is being stored. In this case, it's stored here: event.target.value
+   * TODO: modify this useEffect to pass as many params as you want
+   * - at minimum, pass your state setting function from above
+   * - you could also create more state variables to handle multiple params for your endpoint / user input
    */
-  const handleInput = (event) => {
-    event.preventDefault(); // this prevents the page from refreshing when the button is clicked
-    // TODO: call setCurrTask and pass it the string the user inputed
-  };
-
-  /**
-   * TODO: create an arrow function called addTask that adds currTask to the tasks array
-   * Hint: in javascript, you can easily add to an array using the spread (...) operator. This takes
-   * everything in the array and adds the newest element to it
-   * Example: const old_array = ["hi", "bye"]
-   *          const new_array = [...old_array, "wow"] (we're adding the string "wow")
-   *          console.log(new_array) -> ["hi", "bye", "wow"]
-   */
-  const addTask = () => {};
+  useEffect(() => {
+    if (!characters) {
+      // if our characters is null, fetch some data!
+      getAllAvatarCharacters(setCharacters);
+    }
+    // don't forget to add every state variable you're monitoring to this array!
+  }, [characters]);
 
   return (
     <div className="home">
       <div id="content">
-        <ReactMarkdown source={app_background} />
-        <Form>
-          <Form.Group controlId="form-input">
+        <ReactMarkdown className="background" source={app_background} />
+
+        <div className="container">
+          {/**
+           * Code explanation:
+           * Feel free to delete this or modify this. It is creating a grid using Boostrap classes
+           * - map has a 2nd parameter that tells you the elements index in the array, its good practice to pass this as the key prop
+           * - remember to print to console the data you fetch, it will definitely have different properties & values than my data!
+           */}
+          <div className="row justify-content-md-center">
             {/**
-             * TODO: pass 2 props to the FormControl element
-             * 1. placeholder (string) -> pass a string explaining what the input is for (ex: "Enter a task!")
-             * 2. onChange (function) -> pass one of the functions above that handles the user's input
+             * - TODO: use a ternary to add conditional react elements
+             * - in this case, if characters is null, it displays "No characters"
+             * - otherwise, it maps through characters and renders info for each person!
              */}
-            <FormControl />
-            <InputGroup.Append>
-              {/** TODO: Add a prop & add some text to the button
-               * 1. onClick (function) -> pass one of the functions above that handles a task being added
-               * 2. Add text between the open and closing button tags, describing what the button should say
-               */}
-              <Button></Button>
-            </InputGroup.Append>
-          </Form.Group>
-        </Form>
-        {/*using your tasks array, map through it and pass each task string to the Task component via the name prop*/}
-        {tasks.map((task) => {})}
+            {characters ? (
+              characters.map((char, idx) => (
+                <div className="col-3 character" key={idx}>
+                  {/* Displays name of each character */}
+                  <h2 className="name">{char.name}</h2>
+                  {/* Displays image of each character + adds an additional class (character-img) so I can customize in my CSS file*/}
+                  <img
+                    src={char.photoUrl}
+                    className="img-fluid character-img"
+                    alt="character icon"
+                  ></img>
+                  <div className="character-description">
+                    {/* Displays list of each character's allies (stored in an array within the char object called allies) */}
+                    <h4>Allies</h4>
+                    {char.allies.map(
+                      (a, idx) => a.length > 1 && <li key={idx}>{a}</li>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>No Characters</div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

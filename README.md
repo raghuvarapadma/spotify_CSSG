@@ -1,10 +1,11 @@
-# ToDo App
+# Endpoint App
 
-A simple React ToDo app!
+A simple React app handling an endpoint!
 
-Concepts practiced:
+Concepts / Tools practiced:
 
-- Class Components
-- Props
-- useState Hook
-- event handlers
+- Axios (get)
+- useEffect Hook
+- Ternary Expressions
+- Template Literals
+- Async / Await Functions

@@ -1,41 +1,5 @@
 /* feel free to go on google fonts and change this to another font! */
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap");
-/* @import "../node_modules/react-bulma-components/lib/index.sass"; */
-
-/* buttons */
-[type="button"],
-[type="submit"],
-button,
-.a-button,
-.yellow-button,
-.transp-button,
-.green-button {
-  display: inline-block;
-  text-decoration: none;
-  font-size: 1rem;
-  /* if you change the font, don't forget to change it here too! */
-  font-family: "Source Sans Pro", sans-serif;
-  padding: 0.6rem 1.2rem;
-  vertical-align: middle;
-  text-align: center;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  line-height: 1;
-  border-radius: 10px;
-  margin-bottom: 3%;
-  margin-top: 10px;
-}
-
-[type="button"]:hover,
-[type="submit"]:hover,
-button:hover {
-  background-color: white;
-}
-
-.buttons {
-  text-align: justify;
-}
 
 /* == HTML == */
 *,
@@ -43,6 +7,12 @@ button:hover {
 *:after {
   box-sizing: inherit;
   box-sizing: border-box;
+  --bg-color: rgb(37, 37, 37);
+  --text-color: #eee;
+  --title-color: rgb(129, 184, 27);
+  --header-color: rgb(173, 204, 33);
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 html {
@@ -52,8 +22,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.4;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
   scroll-behavior: smooth;
   box-sizing: border-box;
   font-size: 18px;
@@ -63,6 +31,10 @@ div {
   margin-bottom: 1rem;
 }
 
+.masthead {
+  margin-bottom: 2rem;
+}
+
 /* body */
 
 body {
@@ -70,26 +42,25 @@ body {
   min-height: 100%;
 }
 
-/* Anchors */
-a {
-  border-bottom: 3px solid #beebaa44;
-  color: #5a7913;
-  font-weight: 800;
-  font-size: 1rem;
-  text-decoration: none;
-}
-
-a:hover {
-  background-color: #beebaa44;
-}
-
-/* paragraph */
 /* == HEADERS == */
+h1 {
+  color: var(--title-color);
+}
+
+h2,
+h3 {
+  color: var(--header-color);
+}
+
+h4 {
+  color: var(--text-color);
+}
+
 h1,
 h2,
 h3,
 h4 {
-  color: #1874ca;
+  text-align: center;
   margin-top: 2rem;
   line-height: 1.2;
 }
@@ -103,15 +74,17 @@ h4 {
   padding: 20px;
 }
 
+.background {
+  text-align: center;
+}
+
 /**/
-.wrapper,
-.container {
+
+.wrapper {
   max-width: 1200px;
   width: 100%;
   text-align: center;
   justify-content: center;
-  padding-left: 10px;
-  padding-right: 10px;
   margin: 0 0;
   display: flex;
   align-items: center;
@@ -142,8 +115,4 @@ h4 {
   margin-top: 2rem;
   padding: 0.5rem 1rem;
   text-align: center;
-}
-
-hr {
-  border: 1px solid black;
 }

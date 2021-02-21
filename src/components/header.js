@@ -6,7 +6,7 @@ const Header = () => (
     <div>
       <div>
         <Link to="/">
-          <h1 className="site-title">To Do!</h1>
+          <h1 className="site-title">Name of Your App Here</h1>
         </Link>
       </div>
     </div>
