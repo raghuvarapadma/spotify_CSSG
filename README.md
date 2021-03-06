@@ -1,11 +1,7 @@
-# Endpoint App
+# Note App
 
-A simple React app handling an endpoint!
+A simple React app allowing you to take notes!
 
 Concepts / Tools practiced:
 
-- Axios (get)
-- useEffect Hook
-- Ternary Expressions
-- Template Literals
-- Async / Await Functions
+- firebase cli
