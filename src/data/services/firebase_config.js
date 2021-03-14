@@ -1,6 +1,8 @@
 import firebase from "firebase";
 import dotenv from "dotenv";
 
+// don't change anything in this file
+
 dotenv.config();
 
 const config = {

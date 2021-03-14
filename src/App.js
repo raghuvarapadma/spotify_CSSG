@@ -23,6 +23,7 @@ const App = () => {
       .signInWithEmailAndPassword(email, password)
       .catch((e) => console.log(e));
   };
+
   const logout = () => {
     fb.auth.signOut();
   };
@@ -37,28 +38,34 @@ const App = () => {
   const saveNote = (id, note) => {
     setEdit(!edit);
     if (id) {
-      db.updateNote(id, note, new Date().getTime());
+      // a.k.a if this note already exists in the database & it's being edited
+      // TODO: using the "db" variable, call the updateNote function
+      // pass it id, note, and a new date object like so: new Date().getTime()
     } else {
+      // a.k.a a completely new note
       const date = new Date().getTime();
-      const savedNote = { note, date: date };
-      const key = db.createNote(savedNote);
+      const savedNote = { note, date };
+      const key = db.createNote(savedNote); // returns the key from our createNote function
       if (notes) {
-        setNotes([...notes, { id: key, note: note, date }]);
+        // a.k.a if this is not the first note ever created in the database
+        // TODO: using the spread operator, call setNotes & pass it an array
+        // containing what was already in notes as well as an object containing
+        // an id (with the value of the key variable), note and date
       } else {
-        setNotes([{ id: key, note: note, date }]);
+        // a.k.a if this is the first note ever made
+        // TODO: pass setNotes an array with a single object, containing the same info
+        // as the object described in the if block above
       }
     }
   };
 
   const addNote = () => {
-    saveNote(null, "");
+    // TODO: call saveNote passing in a null id & empty string
   };
 
   useEffect(() => {
-    if (!notes) {
-      // grab notes from firebase
-      db.getAllNotes(setNotes);
-    }
+    // TODO: check if notes is null. if so, call the getAllNotes method using the variable "db"
+    // make sure to pass the setter function for the notes state variable to getAllNotes
   }, [notes]);
 
   return (
@@ -70,26 +77,26 @@ const App = () => {
             {user ? (
               <Button onClick={logout}>Logout</Button>
             ) : (
+              // TODO: pass the login function as prop called "onLogin" to the Login component
               <Login onLogin={login} />
             )}
           </div>
           <div className="row justify-content-md-center">
             {notes &&
               notes.map(({ id, note, date }) => (
-                <Note
-                  key={id}
-                  id={id}
-                  note={note}
-                  currNoteId={currNoteId}
-                  date={new Date(date)}
-                  changeEditStatus={changeEditStatus}
-                  edit={edit}
-                  saveNote={saveNote}
-                  disabled={!user}
-                />
+                /** TODO: pass a whole lot of props to the Note component
+                 * pass the value of id to the key & id prop
+                 * pass the value of note, currNoteId, changeEditStatus, edit, saveNote
+                 * the disabled prop will turn off editing when the user isn't logged in
+                 */
+                <Note date={new Date(date)} disabled={!user} />
               ))}
           </div>
-          {user && <Button onClick={addNote}>Add note!</Button>}
+          {/**TODO: use the double amperstand (&&) to show a button only if the user variable is not null
+           * pass the addNote function to the Button when clicked
+           * This is the Add Note button :)
+           * TIP: there's an example of how to do this on line 85
+           */}
         </div>
       </div>
     </div>

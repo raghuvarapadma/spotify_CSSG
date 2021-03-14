@@ -11,30 +11,30 @@ const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const updateEmail = (e) => setEmail(e.target.value);
-  const updatePassword = (e) => setPassword(e.target.value);
+  /**TODO: write 2 functions
+   * updateEmail -> it will pass the value of the target to setEmail
+   * updatePassword -> it will pass the value of the target to setPassword
+   */
+  const updateEmail = (e) => {};
+  const updatePassword = (e) => {};
 
   const authenticate = (e) => {
     e.preventDefault();
-    onLogin(email, password);
+    //TODO: pass the state variables, email and password, to the onLogin function (which was passed down prop from App)
   };
   return (
     <Form onSubmit={authenticate}>
       <Form.Group>
         <Row>
           <Col>
-            <FormControl
-              type="email"
-              placeholder="Enter email"
-              onChange={updateEmail}
-            />
+            {/**
+             * TODO: pass updateEmail & updatePassword functions to the onChange prop for each respective
+             * FormControl component
+             */}
+            <FormControl type="email" placeholder="Enter email" />
           </Col>
           <Col>
-            <FormControl
-              type="password"
-              placeholder="Password"
-              onChange={updatePassword}
-            />
+            <FormControl type="password" placeholder="Password" />
           </Col>
           <Col>
             <InputGroup.Append>

@@ -16,6 +16,7 @@ const Note = ({
   disabled,
 }) => {
   const [currNote, setCurrNote] = useState(note);
+
   const editNote = (e) => {
     if (currNoteId !== id) {
       changeEditStatus(id);
@@ -24,7 +25,7 @@ const Note = ({
   };
 
   const save = () => {
-    saveNote(id, currNote);
+    // TODO: call saveNote with id & the currNote state variable
   };
 
   const isCurrNote = currNoteId === id;
@@ -33,22 +34,21 @@ const Note = ({
     <div className="col-3 note" key={id}>
       <Form>
         <Form.Group>
-          <FormControl
-            defaultValue={note}
-            onChange={editNote}
-            as="textarea"
-            rows={5}
-            disabled={disabled}
-          />
+          {/** TODO: pass a couple important props to each Note component
+           * pass note to the defaultValue prop
+           * pass the editNote function to the onChange prop
+           * pass disabled to the disabled prop
+           */}
+          <FormControl as="textarea" rows={5} />
           <InputGroup.Append>
             {edit && isCurrNote && (
-              <Button className="save-btn" onClick={save}>
-                Save
-              </Button>
+              // TODO: pass the save function to the onClick prop of Button
+              <Button className="save-btn">Save</Button>
             )}
           </InputGroup.Append>
         </Form.Group>
       </Form>
+      {/**For fun: figure out other ways to display the date */}
       <div className="date">{date.toLocaleString()}</div>
     </div>
   );
