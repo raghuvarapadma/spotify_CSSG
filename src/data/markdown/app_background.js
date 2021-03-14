@@ -1,3 +1,3 @@
-const app_background = `##### Description of your app goes here!`;
+const app_background = `##### Blurb about your app`;
 
 export default app_background;

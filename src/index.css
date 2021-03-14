@@ -7,10 +7,10 @@
 *:after {
   box-sizing: inherit;
   box-sizing: border-box;
-  --bg-color: rgb(37, 37, 37);
-  --text-color: #eee;
-  --title-color: rgb(129, 184, 27);
-  --header-color: rgb(173, 204, 33);
+  --bg-color: rgb(255, 255, 255);
+  --text-color: rgb(0, 0, 0);
+  --title-color: rgb(126, 11, 59);
+  --header-color: rgb(185, 85, 85);
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -76,6 +76,7 @@ h4 {
 
 .background {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 /**/
@@ -105,6 +106,9 @@ h4 {
 
 .main {
   margin: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {
@@ -115,4 +119,37 @@ h4 {
   margin-top: 2rem;
   padding: 0.5rem 1rem;
   text-align: center;
+}
+
+.form-group>.form-control {
+  border: 3px solid var(--title-color);
+  box-shadow: 3px 4px grey;
+}
+
+.container .btn-primary {
+  background-color: var(--title-color);
+  border-color: var(--header-color);
+}
+
+.btn-primary.save-btn {
+  background-color: var(--header-color);
+  border-color: var(--header-color);
+}
+
+.container .btn-primary:hover,
+.container .btn-primary:focus {
+  background-color: var(--title-color);
+  border-color: var(--header-color);
+}
+
+.btn-primary.save-btn:hover,
+.btn-primary.save-btn:focus {
+  background-color: var(--header-color);
+  border-color: var(--header-color);
+}
+
+.date {
+  background-color: var(--title-color);
+  box-shadow: 3px 4px 8px rgb(224, 224, 224);
+  color: #eee;
 }
