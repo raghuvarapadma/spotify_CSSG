@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 
-
 const playlist = (songs) => {
   return (
     <div>
