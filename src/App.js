@@ -12,12 +12,52 @@ import fb from "./data/services/firebase_config";
 import Note from "./Note";
 import Login from "./Login";
 
+import playlist from "./list"
+
+
 const App = () => {
   const [edit, setEdit] = useState(false);
   const [notes, setNotes] = useState(null);
   const [currNoteId, setCurrNoteId] = useState("");
   const [user] = useAuthState(fb.auth);
+  
+  /* Spotify stuff */
+  const fakeData = 
+  [{id: 0, url: "https://open.spotify.com/embed/track/6MdqqkQ8sSC0WB4i8PyRuQ", songName: "No Diggity", artist: "Blackstreet"},
+  {id: 1, url: "https://open.spotify.com/embed/track/0RnDu3eYJqbFKz6MHv2ajd", songName: "Poison", artist: "Bell Biv DeVoe"},
+  {id: 2, url: "https://open.spotify.com/embed/track/6zsk6uF3MxfIeHPlubKBvR", songName: "Get Ur Freak On", artist: "Missy Elliot"},
+  {id: 3, url: "https://open.spotify.com/embed/track/2PpruBYCo4H7WOBJ7Q2EwM", songName: "Hey Ya!", artist: "Outkast"},
+  {id: 4, url: "https://open.spotify.com/embed/track/3SwlakM6VX47IwG0Wll5ek", songName: "Promiscuous", artist: "Nelly Furtado"}]
 
+  const mapper = (songs) => {
+    return (
+      <div>
+      {songs.map(({id, url, songName, artist}) => {
+        return (
+          <div>
+          <iframe id={id} src={url} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          <div>
+          <Button id={id} onClick={filterer}>Delete Song</Button></div>
+          </div>
+        )})}
+      </div>
+    )};
+
+  const [songs, setSongs] = useState(fakeData);
+
+  const filterer = (event) => {
+    var eventId = event.target.id;
+    var id = document.getElementById(eventId).id;
+    const newData = songs.filter(function isId(song) {
+      return song.id != id; 
+    });
+    setSongs(newData);
+    console.log(songs);
+    mapper(songs);
+  }
+
+  /* Spotify stuff */
+  
   const login = (email, password) => {
     fb.auth
       .signInWithEmailAndPassword(email, password)
@@ -72,6 +112,7 @@ const App = () => {
     <div className="home">
       <div id="content">
         <ReactMarkdown className="background" source={app_background} />
+        {playlist(songs)}
         <div className="container">
           <div className="justify-content-md-center">
             {user ? (
